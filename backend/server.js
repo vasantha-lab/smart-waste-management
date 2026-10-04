@@ -4,7 +4,7 @@ const { Pool } = require("pg");
 const { predictCollection } = require("./aiPrediction");
 const bcrypt = require("bcrypt");
 const multer=require("multer");
-const upload = multer({ dest: "uploads/"});
+const upload = multer({ storage: multer.memoryStorage() });
 
 const app = express();
 
