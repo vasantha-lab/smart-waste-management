@@ -1,0 +1,108 @@
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: linear-gradient(135deg, #14532d, #166534);
+  color: white;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.14);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar h2 {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 700;
+}
+
+/* =========================
+   MENU
+========================= */
+
+.navbar-menu {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* =========================
+   MUNICIPALITY + USER
+========================= */
+
+.navbar-menu button {
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.08);
+  color: #f0fdf4;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  padding: 9px 16px;
+  border-radius: 20px;
+
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+}
+
+/* Hover */
+
+.navbar-menu button:hover {
+  background: #f0fdf4;
+  color: #14532d;
+  border-color: #f0fdf4;
+  transform: translateY(-1px);
+}
+
+/* =========================
+   LOGOUT
+========================= */
+
+.navbar-menu button:last-child {
+  margin-left: 5px;
+
+  background: #dc2626;
+  color: white;
+  border: 1px solid #dc2626;
+
+  border-radius: 20px;
+}
+
+.navbar-menu button:last-child:hover {
+  background: #b91c1c;
+  color: white;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+  .navbar {
+    flex-direction: column;
+    gap: 14px;
+    padding: 15px 20px;
+  }
+
+  .navbar h2 {
+    font-size: 19px;
+  }
+
+  .navbar-menu {
+    gap: 7px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .navbar-menu button {
+    font-size: 13px;
+    padding: 8px 13px;
+  }
+}
