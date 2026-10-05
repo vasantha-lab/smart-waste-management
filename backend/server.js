@@ -16,15 +16,24 @@ app.get("/", (req, res) => {
     res.send("Smart Waste Management API is running");
 });
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
-const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "smart_waste",
-  password: "postgres",
-  port: 5432,
-});
+const pool = new Pool(
+  process.env.DATABASE_URL
+    ? {
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+          rejectUnauthorized: false,
+        },
+      }
+    : {
+        user: "postgres",
+        host: "localhost",
+        database: "smart_waste",
+        password: "postgres",
+        port: 5432,
+      }
+);
 
 
 pool.query("SELECT NOW()", (error) => {
