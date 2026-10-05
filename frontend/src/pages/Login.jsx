@@ -1,39 +1,47 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email,
-            password,
-          }),
-        }
-      );
+      const response = await fetch(`${API_URL}/api/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
 
       const data = await response.json();
 
       if (!response.ok) {
-        alert(data.message);
+        alert(data.message || "Login failed");
         return;
       }
 
+      // Save logged-in user
       localStorage.setItem("user", JSON.stringify(data.user));
 
-alert("Login successful!");
+      alert("Login successful!");
 
-console.log("Logged in user:", data.user);
+      // Redirect according to role
+      if (data.user.role === "municipality") {
+        navigate("/municipality");
+      } else {
+        navigate("/user");
+      }
     } catch (error) {
       console.error("Login error:", error);
       alert("Unable to connect to server");
@@ -65,13 +73,10 @@ console.log("Logged in user:", data.user);
           <button type="submit">
             Login
           </button>
+
           <p>
             Don't have an account?{" "}
             <a href="/signup">Sign Up</a>
-          </p>
-          <p>
-            Already have an account?{" "}
-            <a href="/login">Login</a>
           </p>
         </form>
       </div>

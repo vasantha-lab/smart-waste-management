@@ -10,10 +10,13 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use("/uploads",express.static("uploads"));
+app.use("/uploads", express.static("uploads"));
+
+app.get("/", (req, res) => {
+    res.send("Smart Waste Management API is running");
+});
 
 const PORT = 5000;
-
 
 const pool = new Pool({
   user: "postgres",
@@ -511,29 +514,35 @@ app.post("/api/login", async (req, res) => {
 }
 
     if (!passwordMatch) {
-      return res.status(401).json({
-        message: "Invalid email or password",
-      });
-    }
-
-    res.json({
-      message: "Login successful",
-      user: {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-      },
-    });
-  } catch (error) {
-    console.error("Login error:", error);
-
-    res.status(500).json({
-      message: "Failed to login",
+    return res.status(401).json({
+      message: "Invalid email or password",
     });
   }
+
+  res.json({
+    message: "Login successful",
+    user: {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+    },
+  });
+} catch (error) {
+  console.error("Login error:", error);
+
+  res.status(500).json({
+    message: "Failed to login",
+  });
+}
 });
 
+// ADD THIS
+app.get("/", (req, res) => {
+  res.send("Smart Waste Management API is running");
+});
+
+// KEEP THIS
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
