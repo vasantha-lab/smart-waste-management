@@ -26,7 +26,7 @@ function Dashboard() {
 
   // Fetch bin data
   const fetchBins = () => {
-    fetch("http://localhost:5000/api/bins")
+    fetch(`${import.meta.env.VITE_API_URL}/api/bins`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch bins");
@@ -51,7 +51,7 @@ function Dashboard() {
 
   // Fetch pending collection count
   useEffect(() => {
-    fetch("http://localhost:5000/api/collections/pending/count")
+    fetch(`${import.meta.env.VITE_API_URL}/api/collections/pending/count`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch pending collections");
@@ -80,7 +80,7 @@ function Dashboard() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/bins",
+        `${import.meta.env.VITE_API_URL}/api/bins`,
         {
           method: "POST",
           headers: {
