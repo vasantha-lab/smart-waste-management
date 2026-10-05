@@ -9,7 +9,7 @@ function GarbageReports() {
   const markAsCollected = async (id) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/garbage-reports/${id}`,
+        `${import.meta.env.VITE_API_URL}/api/garbage-reports/${id}`,
         {
           method: "PUT",
           headers: {
@@ -39,7 +39,7 @@ function GarbageReports() {
 
   // Fetch garbage reports
   useEffect(() => {
-    fetch("http://localhost:5000/api/garbage-reports")
+    fetch(`${import.meta.env.VITE_API_URL}/api/garbage-reports`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch garbage reports");
@@ -178,7 +178,7 @@ function GarbageReports() {
                 <br />
 
                 <img
-                  src={`http://localhost:5000/${report.photo_path.replace(
+                  src={`${import.meta.env.VITE_API_URL}/${report.photo_path.replace(
                     /\\/g,
                     "/"
                   )}`}

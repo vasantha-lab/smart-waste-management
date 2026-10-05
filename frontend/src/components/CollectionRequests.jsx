@@ -6,7 +6,7 @@ function CollectionRequests() {
   const [statusFilter, setStatusFilter] = useState("All");
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/collections")
+    fetch(`${import.meta.env.VITE_API_URL}/api/collections`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch collection requests");
@@ -27,7 +27,7 @@ function CollectionRequests() {
   const markAsCollected = async (id) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/collections/${id}`,
+        `${import.meta.env.VITE_API_URL}/api/collections/${id}`,
         {
           method: "PUT",
           headers: {
